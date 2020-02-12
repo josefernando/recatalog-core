@@ -1,10 +1,7 @@
 package br.com.recatalog.core.visualbasic6;
 
-import java.security.InvalidParameterException;
 import java.util.ArrayList;
-import java.util.LinkedHashSet;
 import java.util.List;
-import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Set;
 
@@ -46,6 +43,9 @@ public interface ScopeVisualBasic6 extends Scope {
 			}
 			
 			if (result != null) return result;
+			
+			if((properties.getProperty("INSTANCE_OF") != null) && ((String)properties.getProperty("INSTANCE_OF")).equalsIgnoreCase("TYPE") )
+				 return result;
 			
 			Scope s = (Scope)getProperties().getProperty("TYPE");
 			if(s != null && s.getMembers().get(nameToResolve) != null) {
