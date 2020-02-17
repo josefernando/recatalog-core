@@ -1,4 +1,4 @@
-package br.com.recatalog.recatalog.core;
+package br.com.recatalog.core;
 
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
