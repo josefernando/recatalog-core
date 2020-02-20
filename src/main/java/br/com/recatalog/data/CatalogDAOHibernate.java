@@ -9,11 +9,15 @@ import br.com.recatalog.util.PropertyList;
 
 public class CatalogDAOHibernate implements CatalogDAO{
 
-	private static EntityManagerFactory ENTITY_MANAGER_FACTORY =
-			Persistence.createEntityManagerFactory("PU-DBRECATALOG");	
+//	private static EntityManagerFactory ENTITY_MANAGER_FACTORY =
+//			Persistence.createEntityManagerFactory("PU-DBRECATALOG");	
 	
 	@Override
 	public PropertyList getCatalogById(PropertyList props) {
+		
+		EntityManagerFactory ENTITY_MANAGER_FACTORY =
+				Persistence.createEntityManagerFactory("PU-DBRECATALOG");	
+		
 		EntityManager em = ENTITY_MANAGER_FACTORY.createEntityManager();
 		
 		String id = (String)props.getProperty("ID");
@@ -38,8 +42,26 @@ public class CatalogDAOHibernate implements CatalogDAO{
 	}
 
 	@Override
-	public PropertyList addCatalog(PropertyList p) {
-		// TODO Auto-generated method stub
+	public PropertyList addCatalog(PropertyList properties) {
+		
+		EntityManagerFactory ENTITY_MANAGER_FACTORY =
+				Persistence.createEntityManagerFactory("PU-DBRECATALOG");
+		EntityManager em = ENTITY_MANAGER_FACTORY.createEntityManager();
+		
+		Catalog catalog = (Catalog) properties.getProperty("ENTITY");
+
+		em.getTransaction().begin();
+		em.persist(catalog);
+		em.getTransaction().commit();
+		System.out.println(catalog.getId());
+		
+		em.close();
+		
+		System.err.println(catalog.getId() + " " + catalog.getName());
+		
+		ENTITY_MANAGER_FACTORY.close();		
+
+
 		return null;
 	}
 
