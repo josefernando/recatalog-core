@@ -2,16 +2,15 @@ package br.com.recatalog.model;
 
 import java.io.Serializable;
 import java.util.Date;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.HashSet;
+import java.util.Set;
 
-import javax.persistence.CollectionTable;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
-import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.MapKeyColumn;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
@@ -23,10 +22,9 @@ public class Catalog implements Serializable{
 	 */
 	private static final long serialVersionUID = 1L;
 	
-	
 	public Catalog() {
 //		properties = new ArrayList<PropertyCatalog>();
-		properties = new HashMap<String,String>();
+		properties = new HashSet<PropertyCatalog>();
 	}
 	
 	@Id
@@ -46,19 +44,22 @@ public class Catalog implements Serializable{
     @JoinColumn(name = "parent_id", referencedColumnName = "id")
 	private Catalog parent;
 	
-///	@OneToMany()
-//	@ElementCollection
+//	@OneToMany(mappedBy="parentx")
 //	@JoinTable(name = "TBPROPERTY_CATALOG" ,
 //			   joinColumns = { @JoinColumn(name = "FK_CATALOG_ID")}
 //	          )
 	
+///	private List<PropertyCatalog> properties;
+//	@ElementCollection
+//    @CollectionTable(name = "TBPROPERTY_CATALOG", 
+//      joinColumns = {@JoinColumn(name = "FK_CATALOG_ID", referencedColumnName = "id")})
+//    @MapKeyColumn(name = "PROPERTY_KEY")
+//    @Column(name = "PROPERTY_VALUE")
+	
+	@OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
+	@JoinColumn(name = "parentx")
+	private Set<PropertyCatalog> properties;
 //	private List<PropertyCatalog> properties;
-	@ElementCollection
-    @CollectionTable(name = "TBPROPERTY_CATALOG", 
-      joinColumns = {@JoinColumn(name = "FK_CATALOG_ID", referencedColumnName = "id")})
-    @MapKeyColumn(name = "PROPERTY_KEY")
-    @Column(name = "PROPERTY_VALUE")
-	private Map<String,String> properties;
 
     
 	public String getId() {
@@ -99,19 +100,17 @@ public class Catalog implements Serializable{
 //		this.properties = properties;
 //	}
 	
-	public Map<String,String> getProperties() {
+	public Set<PropertyCatalog> getProperties() {
 		return properties;
 	}
-	public void setProperties(Map<String,String> properties) {
+	public void setProperties(Set<PropertyCatalog> properties) {
 		this.properties = properties;
 	}
 	
-//	public void addProperty(PropertyCatalog pc) {
-//		getProperties().add(pc);
-//	}
-	
 	public void addProperty(String key, String value) {
-		getProperties().put(key, value);
+		PropertyCatalog property = new PropertyCatalog(this, key,value);
+		properties.add(property);
+//		property.setParentx(this);
 	}
 	
 	@Override
