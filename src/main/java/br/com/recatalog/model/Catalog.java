@@ -8,6 +8,7 @@ import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
@@ -43,7 +44,7 @@ public class Catalog implements Serializable{
     @JoinColumn(name = "parent_id", referencedColumnName = "id")
 	private Catalog parent;
 	
-	@OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, mappedBy="propertyId.catalog")
+	@OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL, orphanRemoval = true, mappedBy="propertyId.catalog")
 //	@JoinColumn(name = "catalog")
 	private List<PropertyCatalog> properties;
     

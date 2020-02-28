@@ -31,6 +31,18 @@ public class PropertyCatalog implements Serializable {
 	public void setPropertyId(PropertyId propertyId) {
 		this.propertyId = propertyId;
 	}
+	
+	public Catalog getParent() {
+		return getPropertyId().getCatalog();
+	}
+	
+	public String getKey() {
+		return getPropertyId().getKey();
+	}
+	
+	public String getValue() {
+		return getPropertyId().getValue();
+	}
 
 	@Override
 	public int hashCode() {

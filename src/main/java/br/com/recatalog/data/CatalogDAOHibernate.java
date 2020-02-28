@@ -25,6 +25,8 @@ public class CatalogDAOHibernate implements CatalogDAO{
 
 		Catalog catalog = em.find(Catalog.class, id);
 		
+		props.addProperty("ENTITY", catalog);
+		
 		System.out.println(catalog.getId());
 		
 		em.close();
@@ -33,7 +35,7 @@ public class CatalogDAOHibernate implements CatalogDAO{
 		
 		ENTITY_MANAGER_FACTORY.close();		
 		
-		return null;
+		return props;
 	}
 
 	@Override
