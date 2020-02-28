@@ -6,7 +6,6 @@ import javax.persistence.Column;
 import javax.persistence.Embeddable;
 import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
-import javax.persistence.ForeignKey;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
@@ -19,7 +18,6 @@ public class PropertyCatalog implements Serializable {
 	public PropertyCatalog() {}
 	
 	public PropertyCatalog(Catalog catalog, String key, String value) {
-		
 		this.propertyId = new PropertyId(catalog, key,  value);
 	}
 

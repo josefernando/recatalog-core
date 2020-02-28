@@ -5,6 +5,7 @@ import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 
 import br.com.recatalog.model.Catalog;
+import br.com.recatalog.model.PropertyCatalog;
 import br.com.recatalog.util.PropertyList;
 
 public class CatalogDAOHibernate implements CatalogDAO{
@@ -52,6 +53,12 @@ public class CatalogDAOHibernate implements CatalogDAO{
 
 		em.getTransaction().begin();
 		em.persist(catalog);
+		
+		System.err.println("SIZE: " + catalog.getProperties().size());
+		
+		for(PropertyCatalog pc : catalog.getProperties()) {
+			em.persist(pc);
+		}
 		em.getTransaction().commit();
 		System.out.println(catalog.getId());
 		
@@ -60,7 +67,6 @@ public class CatalogDAOHibernate implements CatalogDAO{
 		System.err.println(catalog.getId() + " " + catalog.getName());
 		
 		ENTITY_MANAGER_FACTORY.close();		
-
 
 		return null;
 	}

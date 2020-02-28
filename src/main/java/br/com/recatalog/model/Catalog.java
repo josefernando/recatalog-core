@@ -1,9 +1,9 @@
 package br.com.recatalog.model;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Date;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.List;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -23,8 +23,7 @@ public class Catalog implements Serializable{
 	private static final long serialVersionUID = 1L;
 	
 	public Catalog() {
-//		properties = new ArrayList<PropertyCatalog>();
-		properties = new HashSet<PropertyCatalog>();
+		properties = new ArrayList<PropertyCatalog>();
 	}
 	
 	@Id
@@ -44,23 +43,9 @@ public class Catalog implements Serializable{
     @JoinColumn(name = "parent_id", referencedColumnName = "id")
 	private Catalog parent;
 	
-//	@OneToMany(mappedBy="parentx")
-//	@JoinTable(name = "TBPROPERTY_CATALOG" ,
-//			   joinColumns = { @JoinColumn(name = "FK_CATALOG_ID")}
-//	          )
-	
-///	private List<PropertyCatalog> properties;
-//	@ElementCollection
-//    @CollectionTable(name = "TBPROPERTY_CATALOG", 
-//      joinColumns = {@JoinColumn(name = "FK_CATALOG_ID", referencedColumnName = "id")})
-//    @MapKeyColumn(name = "PROPERTY_KEY")
-//    @Column(name = "PROPERTY_VALUE")
-	
-	@OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
-	@JoinColumn(name = "parentx")
-	private Set<PropertyCatalog> properties;
-//	private List<PropertyCatalog> properties;
-
+	@OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, mappedBy="propertyId.catalog")
+//	@JoinColumn(name = "catalog")
+	private List<PropertyCatalog> properties;
     
 	public String getId() {
 		return id;
@@ -92,25 +77,21 @@ public class Catalog implements Serializable{
 	public void setParent(Catalog parent) {
 		this.parent = parent;
 	}
-	
-//	public List<PropertyCatalog> getProperties() {
-//		return properties;
-//	}
-//	public void setProperties(List<PropertyCatalog> properties) {
-//		this.properties = properties;
-//	}
-	
-	public Set<PropertyCatalog> getProperties() {
+
+	public List<PropertyCatalog> getProperties() {
 		return properties;
 	}
-	public void setProperties(Set<PropertyCatalog> properties) {
+	public void setProperties(List<PropertyCatalog> properties) {
 		this.properties = properties;
 	}
 	
 	public void addProperty(String key, String value) {
 		PropertyCatalog property = new PropertyCatalog(this, key,value);
 		properties.add(property);
-//		property.setParentx(this);
+	}
+	
+	public void addProperty(PropertyCatalog propertyCatalog) {
+		properties.add(propertyCatalog);
 	}
 	
 	@Override

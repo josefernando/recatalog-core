@@ -8,6 +8,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import br.com.recatalog.model.Catalog;
+import br.com.recatalog.model.PropertyCatalog;
 import br.com.recatalog.util.PropertyList;
 
 public class CatalogDAOHibernateTest {
@@ -44,6 +45,9 @@ public class CatalogDAOHibernateTest {
 		catalog.setDtCreated(new Date());
 		catalog.setParent(null);
 		
+		PropertyCatalog pc = new PropertyCatalog(catalog,"KEY001", "VALUE001");
+
+		catalog.addProperty(pc);
 		properties.clear();
 		properties.addProperty("ENTITY", catalog);
 		catalogDAO.addCatalog(properties);
