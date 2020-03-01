@@ -11,28 +11,28 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
-@Table(name="TBPROPERTY_CATALOG")
+@Table(name="TBPROPERTY_CATALOG_ITEM")
 public class PropertyCatalog implements Serializable {
 	private static final long serialVersionUID = 1L;
 		
 	public PropertyCatalog() {}
 	
-	public PropertyCatalog(Catalog catalog, String key, String value) {
-		this.propertyId = new PropertyId(catalog, key,  value);
+	public PropertyCatalog(CatalogItem catalog, String key, String value) {
+		this.propertyId = new PropertyId_(catalog, key,  value);
 	}
 
 	@EmbeddedId
-	private PropertyId propertyId;
+	private PropertyId_ propertyId;
 
-	public PropertyId getPropertyId() {
+	public PropertyId_ getPropertyId() {
 		return propertyId;
 	}
 
-	public void setPropertyId(PropertyId propertyId) {
+	public void setPropertyId(PropertyId_ propertyId) {
 		this.propertyId = propertyId;
 	}
 	
-	public Catalog getParent() {
+	public CatalogItem getParent() {
 		return getPropertyId().getCatalog();
 	}
 	
@@ -71,12 +71,12 @@ public class PropertyCatalog implements Serializable {
 }
 
 @Embeddable
-class PropertyId implements Serializable  {  
+class PropertyId_ implements Serializable  {  
 	private static final long serialVersionUID = 1L;
 	
-	public PropertyId() {}
+	public PropertyId_() {}
 	
-	public PropertyId(Catalog catalog, String key, String value) {
+	public PropertyId_(CatalogItem catalog, String key, String value) {
 		this.catalog = catalog;
 		this.key     = key;
 		this.value   = value;
@@ -84,7 +84,7 @@ class PropertyId implements Serializable  {
 	
 	@ManyToOne
 	@JoinColumn(name="FK_CATALOG_ID", referencedColumnName="ID")
-	Catalog catalog;
+	CatalogItem catalog;
 	
 	@Column(name="PROPERTY_KEY")
     String key;
@@ -105,11 +105,11 @@ class PropertyId implements Serializable  {
 		this.value = value;
 	}
 
-	public Catalog getCatalog() {
+	public CatalogItem getCatalog() {
 		return catalog;
 	}
 
-	public void setCatalog(Catalog catalog) {
+	public void setCatalog(CatalogItem catalog) {
 		this.catalog = catalog;
 	}
 }

@@ -1,8 +1,8 @@
 package br.com.recatalog.data;
 
-import br.com.recatalog.model.PropertyCatalog;
+import br.com.recatalog.model.PropertyCatalogOld;
 
 public interface PropertyCatalogDAO {
 
-	public void addPropertyCatalog(PropertyCatalog propertyCatalog);
+	public void addPropertyCatalog(PropertyCatalogOld propertyCatalog);
 }

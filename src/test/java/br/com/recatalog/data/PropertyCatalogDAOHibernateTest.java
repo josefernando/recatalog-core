@@ -5,8 +5,8 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import br.com.recatalog.model.Catalog;
-import br.com.recatalog.model.PropertyCatalog;
+import br.com.recatalog.model.CatalogOld;
+import br.com.recatalog.model.PropertyCatalogOld;
 
 public class PropertyCatalogDAOHibernateTest {
 	PropertyCatalogDAO propertyCatalogDAO;
@@ -18,10 +18,10 @@ public class PropertyCatalogDAOHibernateTest {
 	
 	@Test
 	public void testAddPropertyCatalog() {
-		Catalog catalog = new Catalog();
+		CatalogOld catalog = new CatalogOld();
 		catalog.setId("SEGUROS");
 		
-		PropertyCatalog propertyCatalog = new PropertyCatalog(catalog,"KEY01", "VALUE01");
+		PropertyCatalogOld propertyCatalog = new PropertyCatalogOld(catalog,"KEY01", "VALUE01");
 
 		propertyCatalogDAO.addPropertyCatalog(propertyCatalog);
 		assertTrue(true);

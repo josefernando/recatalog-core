@@ -4,7 +4,7 @@ import javax.persistence.Entity;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "TBCATALOG")
-public class Catalog extends CatalogItem {
+@Table(name = "TBSOURCE")
+public class Source extends CatalogItem {
 	private static final long serialVersionUID = 1L;
 }

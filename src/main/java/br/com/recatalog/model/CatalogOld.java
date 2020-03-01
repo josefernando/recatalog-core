@@ -10,29 +10,29 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.Id;
-import javax.persistence.Inheritance;
-import javax.persistence.InheritanceType;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "TBCATALOG_ITEM")
-@Inheritance(strategy = InheritanceType.JOINED)
-public class CatalogItem implements Serializable{
+@Table(name="TBCATALOG")
+public class CatalogOld implements Serializable{
+	/** 
+	 * 
+	 */
 	private static final long serialVersionUID = 1L;
 	
-	public CatalogItem() {
-		properties = new ArrayList<PropertyCatalog>();
+	public CatalogOld() {
+		properties = new ArrayList<PropertyCatalogOld>();
 	}
-
+	
 	@Id
 	@Column(name="ID", unique = true)
 	private String id;
-
-	@Column(name="CREATED_ON", nullable=false)
-	private Date createdOn;
+	
+	@Column(name="DT_CREATED", nullable=false)
+	private Date dtCreated;
 	
 	@Column(name="NAME", nullable=false)
     private String name;
@@ -42,10 +42,10 @@ public class CatalogItem implements Serializable{
     
 	@OneToOne()  // foreign key  
     @JoinColumn(name = "parent_id", referencedColumnName = "id")
-	private CatalogItem parent;
+	private CatalogOld parent;
 	
 	@OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL, orphanRemoval = true, mappedBy="propertyId.catalog")
-	private List<PropertyCatalog> properties;
+	private List<PropertyCatalogOld> properties;
     
 	public String getId() {
 		return id;
@@ -53,11 +53,11 @@ public class CatalogItem implements Serializable{
 	public void setId(String id) {
 		this.id = id;
 	}
-	public Date getCreatedOn() {
-		return createdOn;
+	public Date getDtCreated() {
+		return dtCreated;
 	}
-	public void setDtCreated(Date createdOn) {
-		this.createdOn = createdOn;
+	public void setDtCreated(Date dtCreated) {
+		this.dtCreated = dtCreated;
 	}
 	public String getName() {
 		return name;
@@ -71,34 +71,34 @@ public class CatalogItem implements Serializable{
 	public void setDescription(String description) {
 		this.description = description;
 	}
-	public CatalogItem getParent() {
+	public CatalogOld getParent() {
 		return parent;
 	}
-	public void setParent(CatalogItem parent) {
+	public void setParent(CatalogOld parent) {
 		this.parent = parent;
 	}
 
-	public List<PropertyCatalog> getProperties() {
+	public List<PropertyCatalogOld> getProperties() {
 		return properties;
 	}
-	public void setProperties(List<PropertyCatalog> properties) {
+	public void setProperties(List<PropertyCatalogOld> properties) {
 		this.properties = properties;
 	}
 	
 	public void addProperty(String key, String value) {
-		PropertyCatalog property = new PropertyCatalog(this, key,value);
+		PropertyCatalogOld property = new PropertyCatalogOld(this, key,value);
 		properties.add(property);
 	}
 	
-	public void addProperty(PropertyCatalog propertyCatalog) {
+	public void addProperty(PropertyCatalogOld propertyCatalog) {
 		properties.add(propertyCatalog);
 	}
+	
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
 		result = prime * result + ((id == null) ? 0 : id.hashCode());
-		result = prime * result + ((name == null) ? 0 : name.hashCode());
 		return result;
 	}
 	@Override
@@ -109,17 +109,12 @@ public class CatalogItem implements Serializable{
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		CatalogItem other = (CatalogItem) obj;
+		CatalogOld other = (CatalogOld) obj;
 		if (id == null) {
 			if (other.id != null)
 				return false;
 		} else if (!id.equals(other.id))
 			return false;
-		if (name == null) {
-			if (other.name != null)
-				return false;
-		} else if (!name.equals(other.name))
-			return false;
 		return true;
-	}
+	}	
 }

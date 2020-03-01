@@ -11,28 +11,28 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
-@Table(name="TBPROPERTY_CATALOG_ITEM")
-public class PropertyCatalog_ implements Serializable {
+@Table(name="TBPROPERTY_CATALOG")
+public class PropertyCatalogOld implements Serializable {
 	private static final long serialVersionUID = 1L;
 		
-	public PropertyCatalog_() {}
+	public PropertyCatalogOld() {}
 	
-	public PropertyCatalog_(CatalogItem catalog, String key, String value) {
-		this.propertyId = new PropertyId_(catalog, key,  value);
+	public PropertyCatalogOld(CatalogOld catalog, String key, String value) {
+		this.propertyId = new PropertyId(catalog, key,  value);
 	}
 
 	@EmbeddedId
-	private PropertyId_ propertyId;
+	private PropertyId propertyId;
 
-	public PropertyId_ getPropertyId() {
+	public PropertyId getPropertyId() {
 		return propertyId;
 	}
 
-	public void setPropertyId(PropertyId_ propertyId) {
+	public void setPropertyId(PropertyId propertyId) {
 		this.propertyId = propertyId;
 	}
 	
-	public CatalogItem getParent() {
+	public CatalogOld getParent() {
 		return getPropertyId().getCatalog();
 	}
 	
@@ -60,7 +60,7 @@ public class PropertyCatalog_ implements Serializable {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		PropertyCatalog_ other = (PropertyCatalog_) obj;
+		PropertyCatalogOld other = (PropertyCatalogOld) obj;
 		if (propertyId == null) {
 			if (other.propertyId != null)
 				return false;
@@ -71,12 +71,12 @@ public class PropertyCatalog_ implements Serializable {
 }
 
 @Embeddable
-class PropertyId_ implements Serializable  {  
+class PropertyId implements Serializable  {  
 	private static final long serialVersionUID = 1L;
 	
-	public PropertyId_() {}
+	public PropertyId() {}
 	
-	public PropertyId_(CatalogItem catalog, String key, String value) {
+	public PropertyId(CatalogOld catalog, String key, String value) {
 		this.catalog = catalog;
 		this.key     = key;
 		this.value   = value;
@@ -84,7 +84,7 @@ class PropertyId_ implements Serializable  {
 	
 	@ManyToOne
 	@JoinColumn(name="FK_CATALOG_ID", referencedColumnName="ID")
-	CatalogItem catalog;
+	CatalogOld catalog;
 	
 	@Column(name="PROPERTY_KEY")
     String key;
@@ -105,11 +105,11 @@ class PropertyId_ implements Serializable  {
 		this.value = value;
 	}
 
-	public CatalogItem getCatalog() {
+	public CatalogOld getCatalog() {
 		return catalog;
 	}
 
-	public void setCatalog(CatalogItem catalog) {
+	public void setCatalog(CatalogOld catalog) {
 		this.catalog = catalog;
 	}
 }

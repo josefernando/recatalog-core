@@ -6,26 +6,27 @@ import javax.persistence.Persistence;
 
 import br.com.recatalog.model.Catalog;
 import br.com.recatalog.model.CatalogItem;
+import br.com.recatalog.model.CatalogOld;
 import br.com.recatalog.model.PropertyCatalog;
-import br.com.recatalog.model.PropertyCatalog_;
+import br.com.recatalog.model.PropertyCatalogOld;
 import br.com.recatalog.model.SourceRepository;
 import br.com.recatalog.util.PropertyList;
 
 public class CatalogDAOHibernate implements CatalogDAO{
 	
 	@Override
-	public PropertyList getCatalogById(PropertyList props) {
+	public PropertyList getCatalogById(PropertyList properties) {
 		
 		EntityManagerFactory ENTITY_MANAGER_FACTORY =
 				Persistence.createEntityManagerFactory("PU-DBRECATALOG");	
 		
 		EntityManager em = ENTITY_MANAGER_FACTORY.createEntityManager();
 		
-		String id = (String)props.getProperty("ID");
+		String id = (String)properties.getProperty("ID");
 
 		Catalog catalog = em.find(Catalog.class, id);
 		
-		props.addProperty("ENTITY", catalog);
+		properties.addProperty("ENTITY", catalog);
 		
 		System.out.println(catalog.getId());
 		
@@ -35,7 +36,7 @@ public class CatalogDAOHibernate implements CatalogDAO{
 		
 		ENTITY_MANAGER_FACTORY.close();		
 		
-		return props;
+		return properties;
 	}
 
 	@Override
@@ -51,14 +52,14 @@ public class CatalogDAOHibernate implements CatalogDAO{
 				Persistence.createEntityManagerFactory("PU-DBRECATALOG");
 		EntityManager em = ENTITY_MANAGER_FACTORY.createEntityManager();
 		
-		Catalog catalog = (Catalog) properties.getProperty("ENTITY");
+		CatalogOld catalog = (CatalogOld) properties.getProperty("ENTITY");
 
 		em.getTransaction().begin();
 		em.persist(catalog);
 		
 		System.err.println("SIZE: " + catalog.getProperties().size());
 		
-		for(PropertyCatalog pc : catalog.getProperties()) {
+		for(PropertyCatalogOld pc : catalog.getProperties()) {
 			em.persist(pc);
 		}
 		em.getTransaction().commit();
@@ -93,7 +94,7 @@ public class CatalogDAOHibernate implements CatalogDAO{
 		
 		System.err.println("SIZE: " + catalog.getProperties().size());
 		
-		for(PropertyCatalog_ pc : catalog.getProperties()) {
+		for(PropertyCatalog pc : catalog.getProperties()) {
 			em.persist(pc);
 		}
 		em.getTransaction().commit();
@@ -122,7 +123,7 @@ public class CatalogDAOHibernate implements CatalogDAO{
 		
 		System.err.println("SIZE: " + catalog.getProperties().size());
 		
-		for(PropertyCatalog_ pc : catalog.getProperties()) {
+		for(PropertyCatalog pc : catalog.getProperties()) {
 			em.persist(pc);
 		}
 		em.getTransaction().commit();
