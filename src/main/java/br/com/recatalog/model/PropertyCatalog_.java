@@ -17,7 +17,7 @@ public class PropertyCatalog_ implements Serializable {
 		
 	public PropertyCatalog_() {}
 	
-	public PropertyCatalog_(BaseCatalog catalog, String key, String value) {
+	public PropertyCatalog_(CatalogItem catalog, String key, String value) {
 		this.propertyId = new PropertyId_(catalog, key,  value);
 	}
 
@@ -32,7 +32,7 @@ public class PropertyCatalog_ implements Serializable {
 		this.propertyId = propertyId;
 	}
 	
-	public BaseCatalog getParent() {
+	public CatalogItem getParent() {
 		return getPropertyId().getCatalog();
 	}
 	
@@ -76,7 +76,7 @@ class PropertyId_ implements Serializable  {
 	
 	public PropertyId_() {}
 	
-	public PropertyId_(BaseCatalog catalog, String key, String value) {
+	public PropertyId_(CatalogItem catalog, String key, String value) {
 		this.catalog = catalog;
 		this.key     = key;
 		this.value   = value;
@@ -84,7 +84,7 @@ class PropertyId_ implements Serializable  {
 	
 	@ManyToOne
 	@JoinColumn(name="FK_CATALOG_ID", referencedColumnName="ID")
-	BaseCatalog catalog;
+	CatalogItem catalog;
 	
 	@Column(name="PROPERTY_KEY")
     String key;
@@ -105,11 +105,11 @@ class PropertyId_ implements Serializable  {
 		this.value = value;
 	}
 
-	public BaseCatalog getCatalog() {
+	public CatalogItem getCatalog() {
 		return catalog;
 	}
 
-	public void setCatalog(BaseCatalog catalog) {
+	public void setCatalog(CatalogItem catalog) {
 		this.catalog = catalog;
 	}
 }

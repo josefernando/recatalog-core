@@ -7,8 +7,8 @@ import java.util.Date;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import br.com.recatalog.model.BaseCatalog;
 import br.com.recatalog.model.Catalog;
+import br.com.recatalog.model.CatalogItem;
 import br.com.recatalog.model.PropertyCatalog;
 import br.com.recatalog.model.PropertyCatalog_;
 import br.com.recatalog.model.SourceRepository;
@@ -75,8 +75,8 @@ public class CatalogDAOHibernateTest {
 	}
 	
 	@Test
-	public void testBaseAddCatalog() {
-		BaseCatalog catalog = new BaseCatalog();
+	public void testAddCatalogItem() {
+		CatalogItem catalog = new CatalogItem();
 		catalog.setId("CAMBIO");
 		catalog.setName("CAMBIO");
 		catalog.setDescription("CAMBIO DESCRIPTION");
@@ -88,26 +88,29 @@ public class CatalogDAOHibernateTest {
 		catalog.addProperty(pc);
 		properties.clear();
 		properties.addProperty("ENTITY", catalog);
-		catalogDAO.addBaseCatalog(properties);
+		catalogDAO.addCatalogItem(properties);
 
 		assertTrue(true);
 	}
 	
 	@Test
-	public void testSourceRepository() {
+	public void testAddSourceRepository() {
+		CatalogItem ci = new CatalogItem();
+		ci.setId("FINANCEIRO");
+		
 		SourceRepository catalog = new SourceRepository();
-		catalog.setId("SEGUROS");
-		catalog.setName("SEGUROS");
-		catalog.setDescription("SEGUROS DESCRIPTION");
+		catalog.setId("FINANCEIRO.REPOSITORY");
+		catalog.setName("FINANCEIRO");
+		catalog.setDescription("FINANCEIRO DESCRIPTION");
 		catalog.setDtCreated(new Date());
-		catalog.setParent(null);
+		catalog.setParent(ci);
 		
 		PropertyCatalog_ pc = new PropertyCatalog_(catalog,"KEY00", "VALUE00");
 
 		catalog.addProperty(pc);
 		properties.clear();
 		properties.addProperty("ENTITY", catalog);
-		catalogDAO.addBaseCatalog(properties);
+		catalogDAO.addCatalogItem(properties);
 
 		assertTrue(true);
 	}

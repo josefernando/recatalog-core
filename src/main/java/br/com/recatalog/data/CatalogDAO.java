@@ -9,7 +9,7 @@ public interface CatalogDAO {
 	
 	public PropertyList addCatalog(PropertyList properties);
 	
-	public PropertyList addBaseCatalog(PropertyList properties);
+	public PropertyList addCatalogItem(PropertyList properties);
 	
 	public PropertyList addSourceRepository(PropertyList properties);
 

@@ -20,10 +20,10 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "TBCATALOG_ITEM")
 @Inheritance(strategy = InheritanceType.JOINED)
-public class BaseCatalog implements Serializable{
+public class CatalogItem implements Serializable{
 	private static final long serialVersionUID = 1L;
 	
-	public BaseCatalog() {
+	public CatalogItem() {
 		properties = new ArrayList<PropertyCatalog_>();
 	}
 
@@ -42,7 +42,7 @@ public class BaseCatalog implements Serializable{
     
 	@OneToOne()  // foreign key  
     @JoinColumn(name = "parent_id", referencedColumnName = "id")
-	private Catalog parent;
+	private CatalogItem parent;
 	
 	@OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true, mappedBy="propertyId.catalog")
 	private List<PropertyCatalog_> properties;
@@ -71,10 +71,10 @@ public class BaseCatalog implements Serializable{
 	public void setDescription(String description) {
 		this.description = description;
 	}
-	public Catalog getParent() {
+	public CatalogItem getParent() {
 		return parent;
 	}
-	public void setParent(Catalog parent) {
+	public void setParent(CatalogItem parent) {
 		this.parent = parent;
 	}
 
@@ -109,7 +109,7 @@ public class BaseCatalog implements Serializable{
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		BaseCatalog other = (BaseCatalog) obj;
+		CatalogItem other = (CatalogItem) obj;
 		if (id == null) {
 			if (other.id != null)
 				return false;
