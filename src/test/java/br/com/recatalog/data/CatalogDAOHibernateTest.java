@@ -11,6 +11,7 @@ import br.com.recatalog.model.BaseCatalog;
 import br.com.recatalog.model.Catalog;
 import br.com.recatalog.model.PropertyCatalog;
 import br.com.recatalog.model.PropertyCatalog_;
+import br.com.recatalog.model.SourceRepository;
 import br.com.recatalog.util.PropertyList;
 
 public class CatalogDAOHibernateTest {
@@ -83,6 +84,25 @@ public class CatalogDAOHibernateTest {
 		catalog.setParent(null);
 		
 		PropertyCatalog_ pc = new PropertyCatalog_(catalog,"KEY0022", "VALUE0022");
+
+		catalog.addProperty(pc);
+		properties.clear();
+		properties.addProperty("ENTITY", catalog);
+		catalogDAO.addBaseCatalog(properties);
+
+		assertTrue(true);
+	}
+	
+	@Test
+	public void testSourceRepository() {
+		SourceRepository catalog = new SourceRepository();
+		catalog.setId("SEGUROS");
+		catalog.setName("SEGUROS");
+		catalog.setDescription("SEGUROS DESCRIPTION");
+		catalog.setDtCreated(new Date());
+		catalog.setParent(null);
+		
+		PropertyCatalog_ pc = new PropertyCatalog_(catalog,"KEY00", "VALUE00");
 
 		catalog.addProperty(pc);
 		properties.clear();
