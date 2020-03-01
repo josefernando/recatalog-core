@@ -45,7 +45,6 @@ public class Catalog implements Serializable{
 	private Catalog parent;
 	
 	@OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL, orphanRemoval = true, mappedBy="propertyId.catalog")
-//	@JoinColumn(name = "catalog")
 	private List<PropertyCatalog> properties;
     
 	public String getId() {

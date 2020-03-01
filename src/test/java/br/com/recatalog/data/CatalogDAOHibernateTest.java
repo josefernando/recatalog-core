@@ -3,7 +3,6 @@ package br.com.recatalog.data;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.util.Date;
-import java.util.Optional;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -27,7 +26,7 @@ public class CatalogDAOHibernateTest {
 		
 		properties.clear();
 		
-		properties.addProperty("ID", "SEGUROS");
+		properties.addProperty("ID", "CAMBIO");
 		properties = catalogDAO.getCatalogById(properties);
 		
 		Catalog catalog = (Catalog) properties.getProperty("ENTITY");
@@ -42,13 +41,13 @@ public class CatalogDAOHibernateTest {
 	@Test
 	public void testAddCatalog() {
 		Catalog catalog = new Catalog();
-		catalog.setId("SEGUROS");
-		catalog.setName("SEGUROS");
-		catalog.setDescription("SEGUROS DESCRIPTION");
+		catalog.setId("CAMBIO");
+		catalog.setName("CAMBIO");
+		catalog.setDescription("CAMBIO DESCRIPTION");
 		catalog.setDtCreated(new Date());
 		catalog.setParent(null);
 		
-		PropertyCatalog pc = new PropertyCatalog(catalog,"KEY001", "VALUE001");
+		PropertyCatalog pc = new PropertyCatalog(catalog,"KEY002", "VALUE002");
 
 		catalog.addProperty(pc);
 		properties.clear();
