@@ -8,6 +8,9 @@ public interface CatalogDAO {
 	public PropertyList getCataLogByParentId(PropertyList props);
 	
 	public PropertyList addCatalog(PropertyList p);
+	
+	public PropertyList addBaseCatalog(PropertyList p);
+
 
 	public PropertyList getCatalogAll(PropertyList props);
 }

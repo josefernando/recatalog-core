@@ -7,8 +7,10 @@ import java.util.Date;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import br.com.recatalog.model.BaseCatalog;
 import br.com.recatalog.model.Catalog;
 import br.com.recatalog.model.PropertyCatalog;
+import br.com.recatalog.model.PropertyCatalog_;
 import br.com.recatalog.util.PropertyList;
 
 public class CatalogDAOHibernateTest {
@@ -68,6 +70,25 @@ public class CatalogDAOHibernateTest {
 //		pp.addProperty("ENTITY", catalog2);
 //		catalogDAO.addCatalog(pp);
 		
+		assertTrue(true);
+	}
+	
+	@Test
+	public void testBaseAddCatalog() {
+		BaseCatalog catalog = new BaseCatalog();
+		catalog.setId("CAMBIO");
+		catalog.setName("CAMBIO");
+		catalog.setDescription("CAMBIO DESCRIPTION");
+		catalog.setDtCreated(new Date());
+		catalog.setParent(null);
+		
+		PropertyCatalog_ pc = new PropertyCatalog_(catalog,"KEY0022", "VALUE0022");
+
+		catalog.addProperty(pc);
+		properties.clear();
+		properties.addProperty("ENTITY", catalog);
+		catalogDAO.addBaseCatalog(properties);
+
 		assertTrue(true);
 	}
 }

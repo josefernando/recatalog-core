@@ -4,8 +4,10 @@ import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 
+import br.com.recatalog.model.BaseCatalog;
 import br.com.recatalog.model.Catalog;
 import br.com.recatalog.model.PropertyCatalog;
+import br.com.recatalog.model.PropertyCatalog_;
 import br.com.recatalog.util.PropertyList;
 
 public class CatalogDAOHibernate implements CatalogDAO{
@@ -76,6 +78,35 @@ public class CatalogDAOHibernate implements CatalogDAO{
 	@Override
 	public PropertyList getCatalogAll(PropertyList props) {
 		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public PropertyList addBaseCatalog(PropertyList properties) {
+		
+		EntityManagerFactory ENTITY_MANAGER_FACTORY =
+				Persistence.createEntityManagerFactory("PU-DBRECATALOG");
+		EntityManager em = ENTITY_MANAGER_FACTORY.createEntityManager();
+		
+		BaseCatalog catalog = (BaseCatalog) properties.getProperty("ENTITY");
+
+		em.getTransaction().begin();
+		em.persist(catalog);
+		
+		System.err.println("SIZE: " + catalog.getProperties().size());
+		
+		for(PropertyCatalog_ pc : catalog.getProperties()) {
+			em.persist(pc);
+		}
+		em.getTransaction().commit();
+		System.out.println(catalog.getId());
+		
+		em.close();
+		
+		System.err.println(catalog.getId() + " " + catalog.getName());
+		
+		ENTITY_MANAGER_FACTORY.close();		
+
 		return null;
 	}
 }
