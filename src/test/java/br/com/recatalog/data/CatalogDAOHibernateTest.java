@@ -133,8 +133,8 @@ public class CatalogDAOHibernateTest {
 		ci.setId("FINANCEIRO");
 		
 		SourceRepository catalog = new SourceRepository();
-		catalog.setId("FINANCEIRO.REPOSITORY");
-		catalog.setName("FINANCEIRO");
+		catalog.setId("REPOSITORY");
+		catalog.setName("REPOSITORY");
 		catalog.setDescription("FINANCEIRO DESCRIPTION");
 		catalog.setDtCreated(new Date());
 		catalog.setParent(ci);

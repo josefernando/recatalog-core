@@ -4,12 +4,12 @@ import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 
-import br.com.recatalog.model.PropertyCatalogOld;
+import br.com.recatalog.model.PropertyCatalog;
 
 public class PropertyCatalogDAOHibernate implements PropertyCatalogDAO{
 
 	@Override
-	public void addPropertyCatalog(PropertyCatalogOld propertyCatalog) {
+	public void addPropertyCatalog(PropertyCatalog propertyCatalog) {
 		EntityManagerFactory ENTITY_MANAGER_FACTORY =
 				Persistence.createEntityManagerFactory("PU-DBRECATALOG");
 		EntityManager em = ENTITY_MANAGER_FACTORY.createEntityManager();

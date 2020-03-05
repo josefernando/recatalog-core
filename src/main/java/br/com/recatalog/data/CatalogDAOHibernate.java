@@ -6,9 +6,7 @@ import javax.persistence.Persistence;
 
 import br.com.recatalog.model.Catalog;
 import br.com.recatalog.model.CatalogItem;
-import br.com.recatalog.model.CatalogOld;
 import br.com.recatalog.model.PropertyCatalog;
-import br.com.recatalog.model.PropertyCatalogOld;
 import br.com.recatalog.model.SourceRepository;
 import br.com.recatalog.util.PropertyList;
 
@@ -45,34 +43,34 @@ public class CatalogDAOHibernate implements CatalogDAO{
 		return null;
 	}
 
-	@Override
-	public PropertyList addCatalog(PropertyList properties) {
-		
-		EntityManagerFactory ENTITY_MANAGER_FACTORY =
-				Persistence.createEntityManagerFactory("PU-DBRECATALOG");
-		EntityManager em = ENTITY_MANAGER_FACTORY.createEntityManager();
-		
-		CatalogOld catalog = (CatalogOld) properties.getProperty("ENTITY");
-
-		em.getTransaction().begin();
-		em.persist(catalog);
-		
-		System.err.println("SIZE: " + catalog.getProperties().size());
-		
-		for(PropertyCatalogOld pc : catalog.getProperties()) {
-			em.persist(pc);
-		}
-		em.getTransaction().commit();
-		System.out.println(catalog.getId());
-		
-		em.close();
-		
-		System.err.println(catalog.getId() + " " + catalog.getName());
-		
-		ENTITY_MANAGER_FACTORY.close();		
-
-		return null;
-	}
+//	@Override
+//	public PropertyList addCatalog(PropertyList properties) {
+//		
+//		EntityManagerFactory ENTITY_MANAGER_FACTORY =
+//				Persistence.createEntityManagerFactory("PU-DBRECATALOG");
+//		EntityManager em = ENTITY_MANAGER_FACTORY.createEntityManager();
+//		
+//		CatalogOld catalog = (CatalogOld) properties.getProperty("ENTITY");
+//
+//		em.getTransaction().begin();
+//		em.persist(catalog);
+//		
+//		System.err.println("SIZE: " + catalog.getProperties().size());
+//		
+//		for(PropertyCatalogOld pc : catalog.getProperties()) {
+//			em.persist(pc);
+//		}
+//		em.getTransaction().commit();
+//		System.out.println(catalog.getId());
+//		
+//		em.close();
+//		
+//		System.err.println(catalog.getId() + " " + catalog.getName());
+//		
+//		ENTITY_MANAGER_FACTORY.close();		
+//
+//		return null;
+//	}
 
 	@Override
 	public PropertyList getCatalogAll(PropertyList props) {

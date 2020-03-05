@@ -48,34 +48,45 @@ public class CatalogItem implements Serializable{
 	private List<PropertyCatalog> properties;
     
 	public String getId() {
-		return id;
+		return id ;
 	}
+	
 	public void setId(String id) {
-		this.id = id;
+		if(getParent() != null) {
+			this.id = getParent().getId().concat(".").concat(id);
+		}
+		else this.id = id;
 	}
+	
 	public Date getCreatedOn() {
 		return createdOn;
 	}
 	public void setDtCreated(Date createdOn) {
 		this.createdOn = createdOn;
 	}
+	
 	public String getName() {
 		return name;
 	}
 	public void setName(String name) {
 		this.name = name;
 	}
+	
 	public String getDescription() {
 		return description;
 	}
 	public void setDescription(String description) {
 		this.description = description;
 	}
+	
 	public CatalogItem getParent() {
 		return parent;
 	}
 	public void setParent(CatalogItem parent) {
 		this.parent = parent;
+		if(getId() != null) {
+			this.id = getParent().getId().concat(".").concat(getId());
+		}
 	}
 
 	public List<PropertyCatalog> getProperties() {
