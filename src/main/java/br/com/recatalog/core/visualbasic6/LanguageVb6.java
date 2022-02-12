@@ -783,7 +783,7 @@ public class LanguageVb6 extends Language {
 	
 	propPrinter.addProperty("DATA_TYPE", "Array");
 	preDefinedSymbols.put("Fonts Array",propPrinter);	
-	
+
 	//=================================================================================
 	  PropertyList propThreed = new PropertyList();
 	  propThreed.addProperty(CATEGORY, LANGUAGE);
@@ -815,7 +815,7 @@ public class LanguageVb6 extends Language {
 	    preDefinedSymbols.put("MSFlexGrid",propClassSS);
 	    preDefinedSymbols.put("ListItem",propClassSS);
 //=============================================================================
-	    
+   
 		  PropertyList propUserFunction = new PropertyList();
 		  propUserFunction.addProperty(CATEGORY, LANGUAGE);
 		  propUserFunction.addProperty("DEF_MODE", "BUILTIN"); 
